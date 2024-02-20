@@ -6,6 +6,7 @@ const { withBlitz } = require("@blitzjs/next");
  **/
 const config = {
   blitz: { resolverPath: "root" },
+  pageExtensions: ["page.tsx", "page.ts", "page.jsx", "page.js"],
 };
 
 module.exports = withBlitz(config);
