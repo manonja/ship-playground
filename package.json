@@ -5,8 +5,7 @@
     "dev": "blitz dev",
     "build": "blitz build",
     "start": "blitz start",
-    "studio": "blitz prisma studio",
-    "prepare": "husky install"
+    "studio": "blitz prisma studio"
   },
   "prisma": {
     "schema": "db/schema.prisma"
