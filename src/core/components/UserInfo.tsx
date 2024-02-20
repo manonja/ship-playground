@@ -4,6 +4,8 @@ import logout from "src/features/auth/mutations/logout";
 import Link from "next/link";
 import { Routes } from "@blitzjs/next";
 import { FC } from "react";
+import { Vertical } from "mantine-layout-components";
+import { Button } from "@mantine/core";
 
 export const UserInfo: FC = () => {
   const currentUser = useCurrentUser();
@@ -28,14 +30,20 @@ export const UserInfo: FC = () => {
     );
   } else {
     return (
-      <>
-        <Link href={Routes.SignupPage()}>
-          <strong>Sign Up</strong>
-        </Link>
-        <Link href={Routes.LoginPage()}>
-          <strong>Login</strong>
-        </Link>
-      </>
+      <Vertical>
+        <Button component={Link} href={Routes.SignupPage()}>
+          Sign Up
+        </Button>
+        <Button component={Link} href={Routes.LoginPage()}>
+          Login
+        </Button>
+        {/*<Link href={Routes.SignupPage()}>*/}
+        {/*  <strong>Sign Up</strong>*/}
+        {/*</Link>*/}
+        {/*<Link href={Routes.LoginPage()}>*/}
+        {/*  <strong>Login</strong>*/}
+        {/*</Link>*/}
+      </Vertical>
     );
   }
 };

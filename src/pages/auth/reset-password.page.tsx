@@ -1,18 +1,46 @@
 import Layout from "src/core/layouts/Layout";
-import { LabeledTextField } from "src/core/components/LabeledTextField";
-import { Form, FORM_ERROR } from "src/core/components/Form";
-import { ResetPassword } from "src/features/auth/schemas";
+import { FORM_ERROR } from "src/core/components/Form";
 import resetPassword from "src/features/auth/mutations/resetPassword";
 import { BlitzPage, Routes } from "@blitzjs/next";
 import { useRouter } from "next/router";
 import { useMutation } from "@blitzjs/rpc";
 import Link from "next/link";
 import { assert } from "blitz";
+import { useForm } from "@mantine/form";
+import { Button, PasswordInput } from "@mantine/core";
+import React from "react";
 
 const ResetPasswordPage: BlitzPage = () => {
   const router = useRouter();
   const token = router.query.token?.toString();
   const [resetPasswordMutation, { isSuccess }] = useMutation(resetPassword);
+
+  const form = useForm({
+    initialValues: {
+      password: "",
+      passwordConfirmation: "",
+    },
+  });
+  let onSubmit = async (values: {
+    token: string;
+    password: string;
+    passwordConfirmation: string;
+  }) => {
+    try {
+      assert(token, "token is required.");
+      await resetPasswordMutation({ ...values, token });
+    } catch (error: any) {
+      if (error.name === "ResetPasswordError") {
+        return {
+          [FORM_ERROR]: error.message,
+        };
+      } else {
+        return {
+          [FORM_ERROR]: "Sorry, we had an unexpected error. Please try again.",
+        };
+      }
+    }
+  };
 
   return (
     <Layout title="Reset Your Password">
@@ -26,38 +54,23 @@ const ResetPasswordPage: BlitzPage = () => {
           </p>
         </div>
       ) : (
-        <Form
-          submitText="Reset Password"
-          schema={ResetPassword}
-          initialValues={{
-            password: "",
-            passwordConfirmation: "",
-            token,
-          }}
-          onSubmit={async (values) => {
-            try {
-              assert(token, "token is required.");
-              await resetPasswordMutation({ ...values, token });
-            } catch (error: any) {
-              if (error.name === "ResetPasswordError") {
-                return {
-                  [FORM_ERROR]: error.message,
-                };
-              } else {
-                return {
-                  [FORM_ERROR]: "Sorry, we had an unexpected error. Please try again.",
-                };
-              }
-            }
-          }}
-        >
-          <LabeledTextField name="password" label="New Password" type="password" />
-          <LabeledTextField
-            name="passwordConfirmation"
-            label="Confirm New Password"
-            type="password"
+        <form onSubmit={form.onSubmit(onSubmit)}>
+          <PasswordInput
+            withAsterisk
+            label="Password"
+            placeholder=""
+            {...form.getInputProps("password")}
           />
-        </Form>
+
+          <PasswordInput
+            withAsterisk
+            label="Confirm Password"
+            placeholder=""
+            {...form.getInputProps("passwordConfirmation")}
+          />
+
+          <Button type="submit">Submit</Button>
+        </form>
       )}
     </Layout>
   );
