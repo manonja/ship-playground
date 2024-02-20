@@ -8,9 +8,7 @@ const Home: BlitzPage = () => {
     <Layout title="Home">
       <main>
         <div>
-          <Suspense fallback="Loading...">
-            <UserInfo />
-          </Suspense>
+          <UserInfo />
         </div>
       </main>
     </Layout>

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { FC } from "react";
+import React, { FC, Suspense } from "react";
 import { BlitzLayout } from "@blitzjs/next";
 
 const Layout: FC<{ title?: string; children?: React.ReactNode }> = ({ title, children }) => {
@@ -9,8 +9,7 @@ const Layout: FC<{ title?: string; children?: React.ReactNode }> = ({ title, chi
         <title>{title || "ship-playground"}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      {children}
+      <Suspense fallback="Loading...">{children}</Suspense>
     </>
   );
 };
