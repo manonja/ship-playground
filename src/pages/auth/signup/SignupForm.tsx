@@ -10,6 +10,7 @@ type SignupFormProps = {
 };
 
 export const SignupForm = (props: SignupFormProps) => {
+  const [signupMutation] = useMutation(signup);
   const form = useForm({
     initialValues: {
       email: "",
@@ -20,7 +21,6 @@ export const SignupForm = (props: SignupFormProps) => {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
     },
   });
-  const [signupMutation] = useMutation(signup);
 
   let onSubmit = async (values: { email: string; password: string } | undefined) => {
     try {
