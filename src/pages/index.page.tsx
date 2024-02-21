@@ -8,14 +8,10 @@ import { Vertical } from "mantine-layout-components";
 const Home: BlitzPage = () => {
   return (
     <Layout title="Home">
-      <main>
-        {<UserInfo />}
-        {
-          <Vertical center fullH fullW>
-            <MainAuthenticationForm />
-          </Vertical>
-        }
-      </main>
+      <UserInfo />
+      <Vertical center fullH fullW>
+        <MainAuthenticationForm />
+      </Vertical>
     </Layout>
   );
 };
