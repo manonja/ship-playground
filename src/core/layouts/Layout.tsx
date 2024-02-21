@@ -1,13 +1,12 @@
 import Head from "next/head";
 import React, { FC, Suspense } from "react";
-import { AppShell, Navbar, Header, Text, Footer, Anchor } from "@mantine/core";
+import { AppShell, Header, Text, Footer, Anchor } from "@mantine/core";
 import { Horizontal, Vertical } from "mantine-layout-components";
 import { Routes } from "@blitzjs/next";
 import Link from "next/link";
 
 const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode }> = ({
   title,
-  maxWidth = "800",
   children,
 }) => {
   const thisYear = new Date().getFullYear();
