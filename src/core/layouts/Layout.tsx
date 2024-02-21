@@ -1,15 +1,19 @@
 import Head from "next/head";
 import React, { FC, Suspense } from "react";
-import { AppShell, Header, Text, Footer, Anchor } from "@mantine/core";
+import { AppShell, Header, Text, Footer, Anchor, Button } from "@mantine/core";
 import { Horizontal, Vertical } from "mantine-layout-components";
 import { Routes } from "@blitzjs/next";
 import Link from "next/link";
+import { useMutation } from "@blitzjs/rpc";
+import logout from "src/features/auth/mutations/logout";
 
 const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode }> = ({
   title,
   children,
 }) => {
   const thisYear = new Date().getFullYear();
+  const [logoutMutation] = useMutation(logout);
+
   return (
     <>
       <Head>
@@ -26,7 +30,7 @@ const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode
           // }
           header={
             <Header height={60} p="xs">
-              <Horizontal fullH>
+              <Horizontal fullH spaceBetween>
                 <Anchor
                   component={Link}
                   href={Routes.Home()}
@@ -38,6 +42,16 @@ const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode
                   {" "}
                   <div>M O V Ers</div>
                 </Anchor>
+
+                <Button
+                  size="xs"
+                  variant="light"
+                  onClick={async () => {
+                    await logoutMutation();
+                  }}
+                >
+                  Logout
+                </Button>
               </Horizontal>
             </Header>
           }

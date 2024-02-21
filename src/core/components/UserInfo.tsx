@@ -1,28 +1,21 @@
 import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
-import { useMutation } from "@blitzjs/rpc";
-import logout from "src/features/auth/mutations/logout";
 import { FC } from "react";
+import { Text } from "@mantine/core";
+import { Vertical } from "mantine-layout-components";
 
 export const UserInfo: FC = () => {
   const currentUser = useCurrentUser();
-  const [logoutMutation] = useMutation(logout);
 
   if (!currentUser) return null;
 
   return (
-    <>
-      <button
-        onClick={async () => {
-          await logoutMutation();
-        }}
-      >
-        Logout
-      </button>
-      <div>
+    <Vertical>
+      <Text>
         User id: <code>{currentUser.id}</code>
-        <br />
+      </Text>
+      <Text>
         User role: <code>{currentUser.role}</code>
-      </div>
-    </>
+      </Text>
+    </Vertical>
   );
 };
