@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { BlitzPage } from "@blitzjs/next";
 import { UserInfo } from "../core/components/UserInfo";
 import Layout from "../core/layouts/Layout";
