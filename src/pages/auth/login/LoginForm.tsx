@@ -1,4 +1,4 @@
-import { AuthenticationError, PromiseReturnType } from "blitz";
+import { PromiseReturnType } from "blitz";
 import Link from "next/link";
 import login from "src/features/auth/mutations/login";
 import { useMutation } from "@blitzjs/rpc";
@@ -7,7 +7,6 @@ import { useForm } from "@mantine/form";
 import { Button, PasswordInput, TextInput, Title } from "@mantine/core";
 import React from "react";
 import { Vertical } from "mantine-layout-components";
-import { FORM_ERROR } from "src/core/components/Form";
 
 type LoginFormProps = {
   onSuccess?: (user: PromiseReturnType<typeof login>) => void;

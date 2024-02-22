@@ -40,7 +40,7 @@ const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode
                   size="xl"
                 >
                   {" "}
-                  <div>M O V Ers</div>
+                  <div>Techio</div>
                 </Anchor>
 
                 <Button
