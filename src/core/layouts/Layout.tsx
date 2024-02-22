@@ -6,13 +6,33 @@ import { Routes } from "@blitzjs/next";
 import Link from "next/link";
 import { useMutation } from "@blitzjs/rpc";
 import logout from "src/features/auth/mutations/logout";
+import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
+import { variant } from "@mantine/styles/lib/theme/functions/fns/variant/variant";
+
+const LogoutButton = () => {
+  const user = useCurrentUser();
+  const [logoutMutation] = useMutation(logout);
+
+  if (!user) return null;
+
+  return (
+    <Button
+      size="xs"
+      variant="light"
+      onClick={async () => {
+        await logoutMutation();
+      }}
+    >
+      Logout
+    </Button>
+  );
+};
 
 const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode }> = ({
   title,
   children,
 }) => {
   const thisYear = new Date().getFullYear();
-  const [logoutMutation] = useMutation(logout);
 
   return (
     <>
@@ -43,15 +63,7 @@ const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode
                   <div>Techio</div>
                 </Anchor>
 
-                <Button
-                  size="xs"
-                  variant="light"
-                  onClick={async () => {
-                    await logoutMutation();
-                  }}
-                >
-                  Logout
-                </Button>
+                <LogoutButton />
               </Horizontal>
             </Header>
           }
