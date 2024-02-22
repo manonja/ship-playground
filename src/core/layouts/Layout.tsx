@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useMutation } from "@blitzjs/rpc";
 import logout from "src/features/auth/mutations/logout";
 import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
-import { variant } from "@mantine/styles/lib/theme/functions/fns/variant/variant";
 
 const LogoutButton = () => {
   const user = useCurrentUser();

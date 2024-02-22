@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { BlitzPage } from "@blitzjs/next";
 import Layout from "../core/layouts/Layout";
 import MainAuthenticationForm from "../core/components/MainAuthenticationForm";
