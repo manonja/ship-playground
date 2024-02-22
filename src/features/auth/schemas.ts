@@ -15,6 +15,11 @@ export const ForgotPassword = z.object({
   email,
 });
 
+export const Login = z.object({
+  email,
+  password: z.string(),
+});
+
 export const ResetPassword = z
   .object({
     password: password,
