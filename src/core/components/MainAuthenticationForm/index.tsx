@@ -82,7 +82,7 @@ function MainAuthenticationForm(props: PaperProps) {
   return (
     <Paper radius="md" p="xl" withBorder {...props}>
       <Text size="lg" fw={500}>
-        Welcome to M O V Ers, {type} with
+        Welcome to Techio, {type} with
       </Text>
 
       <Group grow mb="md" mt="md">
