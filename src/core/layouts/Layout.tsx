@@ -32,6 +32,7 @@ const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode
   children,
 }) => {
   const thisYear = new Date().getFullYear();
+  const projectName = "Techio";
 
   return (
     <>
@@ -70,7 +71,7 @@ const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode
             <Footer height={30}>
               <Horizontal fullH center>
                 <Text size="xs" color="dimned">
-                  copyright {thisYear}
+                  copyright {projectName} {thisYear}
                 </Text>
               </Horizontal>
             </Footer>
