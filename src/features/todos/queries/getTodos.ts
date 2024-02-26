@@ -4,10 +4,6 @@ import { z } from "zod";
 import db from "db";
 
 const Input = z.object({});
-export default resolver.pipe(
-  resolver.zod(Input),
-  resolver.authorize(),
-  async ({}, { session: userId }) => {
-    return db.todo.findMany();
-  }
-);
+export default resolver.pipe(resolver.zod(Input), resolver.authorize(), async ({}) => {
+  return db.todo.findMany();
+});
