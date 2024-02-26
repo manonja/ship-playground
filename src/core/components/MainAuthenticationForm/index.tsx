@@ -59,7 +59,9 @@ function MainAuthenticationForm(props: PaperProps) {
     }
   };
 
-  const onSignup = async (values: { email: string; password: string } | undefined) => {
+  const onSignup = async (
+    values: { email: string; password: string; name: string } | undefined
+  ) => {
     try {
       await signupMutation(values);
     } catch (error: any) {
@@ -72,7 +74,7 @@ function MainAuthenticationForm(props: PaperProps) {
     }
   };
 
-  const onSubmit = (values: { email: string; password: string } | undefined) => {
+  const onSubmit = (values: { email: string; password: string; name: string } | undefined) => {
     if (type === "login") onLogin(values);
     else {
       onSignup(values);
@@ -95,6 +97,7 @@ function MainAuthenticationForm(props: PaperProps) {
         <Stack>
           {type === "register" && (
             <TextInput
+              required
               label="Name"
               placeholder="Your name"
               {...form.getInputProps("name")}

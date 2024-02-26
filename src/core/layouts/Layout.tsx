@@ -15,15 +15,18 @@ const LogoutButton = () => {
   if (!user) return null;
 
   return (
-    <Button
-      size="xs"
-      variant="light"
-      onClick={async () => {
-        await logoutMutation();
-      }}
-    >
-      Logout
-    </Button>
+    <Horizontal>
+      <Text>{user.name}</Text>
+      <Button
+        size="xs"
+        variant="light"
+        onClick={async () => {
+          await logoutMutation();
+        }}
+      >
+        Logout
+      </Button>
+    </Horizontal>
   );
 };
 

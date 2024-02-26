@@ -8,6 +8,7 @@ import { email, password } from "src/features/auth/schemas";
 export const Input = z.object({
   email,
   password,
+  name: z.string(),
 });
 export default resolver.pipe(resolver.zod(Input), async ({ email, password }, ctx) => {
   const hashedPassword = await SecurePassword.hash(password.trim());
