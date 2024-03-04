@@ -10,17 +10,19 @@ export default resolver.pipe(
   resolver.zod(Input),
   resolver.authorize(),
   async ({ id }, { session: { userId } }) => {
+    const todo = await db.todo.findFirst({
+      where: { id, userId },
+      select: { done: true },
+    });
+
+    if (!todo) throw new Error("Todo not found");
+
     return db.todo.update({
       where: {
         id,
       },
       data: {
-        done: true,
-        user: {
-          connect: {
-            id: userId,
-          },
-        },
+        done: !todo.done,
       },
     });
   }

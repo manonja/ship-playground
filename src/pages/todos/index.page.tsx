@@ -8,6 +8,7 @@ import { Suspense, useState } from "react";
 import Layout from "src/core/layouts/Layout";
 import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
 import toggleTodo from "src/features/todos/mutations/toggleTodo";
+import cleanCompleted from "src/features/todos/mutations/cleanCompleted";
 
 const Todo = ({ todo }) => {
   const [$toggleTodo] = useMutation(toggleTodo);
@@ -21,9 +22,13 @@ const Todo = ({ todo }) => {
 const Todos = () => {
   const currentUser = useCurrentUser();
 
-  const [todos] = useQuery(fetchTodos, { where: { id: currentUser?.id } });
+  const [todos] = useQuery(fetchTodos, {
+    where: { id: currentUser?.id },
+    orderBy: { createdAt: "desc" },
+  });
   const [todoTitle, setTodoTitle] = useState("");
   const [$addTodo] = useMutation(addTodo);
+  const [$cleanTodos] = useMutation(cleanCompleted);
   return (
     <Vertical>
       <Input
@@ -37,6 +42,13 @@ const Todos = () => {
         }}
       >
         Add Todo
+      </Button>
+      <Button
+        onClick={async () => {
+          await $cleanTodos({});
+        }}
+      >
+        Clean todos{" "}
       </Button>
       <List>
         {todos.map((todo) => (
