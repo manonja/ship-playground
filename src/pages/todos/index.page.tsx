@@ -9,7 +9,7 @@ import React, { Suspense, useState } from "react";
 import Layout from "src/core/layouts/Layout";
 import toggleTodo from "src/features/todos/mutations/toggleTodo";
 import cleanCompleted from "src/features/todos/mutations/cleanCompleted";
-import getCurrentUser from "src/features/users/queries/getCurrentUser";
+import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
 
 const Todo = ({ todo }) => {
   const [$toggleTodo] = useMutation(toggleTodo);
@@ -21,9 +21,10 @@ const Todo = ({ todo }) => {
   );
 };
 const Todos = () => {
-  const [curUser] = useQuery(getCurrentUser, null);
+  const currentUser = useCurrentUser();
+
   const [todos] = useQuery(getTodos, {
-    where: { id: curUser?.id },
+    where: { id: currentUser?.id },
     orderBy: { createdAt: "desc" },
   });
   const [todoTitle, setTodoTitle] = useState("");
