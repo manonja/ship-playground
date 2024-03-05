@@ -15,6 +15,7 @@ export const SignupForm = (props: SignupFormProps) => {
     initialValues: {
       email: "",
       password: "",
+      name: "",
     },
 
     validate: {
@@ -22,7 +23,7 @@ export const SignupForm = (props: SignupFormProps) => {
     },
   });
 
-  let onSubmit = async (values: { email: string; password: string } | undefined) => {
+  let onSubmit = async (values: { email: string; password: string; name: string } | undefined) => {
     try {
       await signupMutation(values);
       props.onSuccess?.();
