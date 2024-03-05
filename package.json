@@ -5,8 +5,9 @@
     "dev": "blitz dev",
     "build": "yarn blitz prisma migrate deploy && yarn blitz prisma generate && yarn blitz build",
     "start": "blitz start",
-    "studio": "BROWSER=none yarn blitz prisma studio",
-    "db:migrate": "yarn blitz prisma migrate dev"
+    "db:migrate": "yarn blitz prisma migrate dev",
+    "db:studio": "BROWSER=none yarn blitz prisma studio",
+    "railway:dev": "railway run yarn dev"
   },
   "prisma": {
     "schema": "db/schema.prisma"

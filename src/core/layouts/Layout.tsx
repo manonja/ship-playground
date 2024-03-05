@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import Head from "next/head";
-import React, { FC, Suspense } from "react";
+import React, { FC } from "react";
 
 import { AppShell, Header, Text, Footer, Anchor, Button } from "@mantine/core";
 import { Horizontal, Vertical } from "mantine-layout-components";
@@ -88,11 +88,9 @@ const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode
           },
         })}
       >
-        <Suspense fallback={"...loading"}>
-          <Vertical fullH fullW>
-            {children}
-          </Vertical>
-        </Suspense>
+        <Vertical fullH fullW>
+          {children}
+        </Vertical>
       </AppShell>
     </>
   );
