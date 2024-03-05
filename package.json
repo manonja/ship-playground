@@ -32,7 +32,6 @@
     "@prisma/client": "^5.10.2",
     "@tabler/icons-react": "^2.47.0",
     "@tanstack/query-core": "4.24.4",
-    "@vercel/postgres": "^0.7.2",
     "blitz": "^2.0.5",
     "mantine-layout-components": "^0.1.2",
     "next": "14.0.4",
