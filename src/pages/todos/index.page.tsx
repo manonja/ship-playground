@@ -4,7 +4,7 @@ import addTodo from "src/features/todos/mutations/addTodo";
 import { Button, List, Text, Input, Checkbox } from "@mantine/core";
 import { Horizontal, Vertical } from "mantine-layout-components";
 import { BlitzPage } from "@blitzjs/next";
-import { Suspense, useState } from "react";
+import React, { Suspense, useState } from "react";
 import Layout from "src/core/layouts/Layout";
 import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
 import toggleTodo from "src/features/todos/mutations/toggleTodo";
@@ -30,31 +30,38 @@ const Todos = () => {
   const [$addTodo] = useMutation(addTodo);
   const [$cleanTodos] = useMutation(cleanCompleted);
   return (
-    <Vertical>
-      <Input
-        placeholder="Add todo"
-        value={todoTitle}
-        onChange={(event) => setTodoTitle(event.target.value)}
-      />
-      <Button
-        onClick={async () => {
-          await $addTodo({ todoTitle });
-        }}
-      >
-        Add Todo
-      </Button>
-      <Button
-        onClick={async () => {
-          await $cleanTodos({});
-        }}
-      >
-        Clean todos{" "}
-      </Button>
+    <Vertical fullH fullW center>
+      <Horizontal>
+        <Input
+          placeholder="Add todo"
+          value={todoTitle}
+          onChange={(event) => setTodoTitle(event.target.value)}
+        />
+        <Button
+          variant="gradient"
+          gradient={{ from: "teal", to: "blue", deg: 60 }}
+          onClick={async () => {
+            await $addTodo({ todoTitle });
+          }}
+        >
+          Add Todo
+        </Button>
+      </Horizontal>
+
       <List>
         {todos.map((todo) => (
           <Todo todo={todo} />
         ))}
       </List>
+      <Button
+        variant="gradient"
+        gradient={{ from: "#ed6ea0", to: "#ec8c69", deg: 35 }}
+        onClick={async () => {
+          await $cleanTodos({});
+        }}
+      >
+        Clean Todo(s)
+      </Button>
     </Vertical>
   );
 };
