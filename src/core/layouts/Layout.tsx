@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Head from "next/head";
 import React, { FC, Suspense } from "react";
 

@@ -1,14 +1,15 @@
+"use client";
 import { useMutation, useQuery } from "@blitzjs/rpc";
-import fetchTodos from "src/features/todos/queries/getTodos";
+import getTodos from "src/features/todos/queries/getTodos";
 import addTodo from "src/features/todos/mutations/addTodo";
 import { Button, List, Text, Input, Checkbox } from "@mantine/core";
 import { Horizontal, Vertical } from "mantine-layout-components";
 import { BlitzPage } from "@blitzjs/next";
 import React, { Suspense, useState } from "react";
 import Layout from "src/core/layouts/Layout";
-import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
 import toggleTodo from "src/features/todos/mutations/toggleTodo";
 import cleanCompleted from "src/features/todos/mutations/cleanCompleted";
+import getCurUser from "src/features/users/queries/getCurrentUser";
 
 const Todo = ({ todo }) => {
   const [$toggleTodo] = useMutation(toggleTodo);
@@ -20,10 +21,9 @@ const Todo = ({ todo }) => {
   );
 };
 const Todos = () => {
-  const currentUser = useCurrentUser();
-
-  const [todos] = useQuery(fetchTodos, {
-    where: { id: currentUser?.id },
+  const [curUser] = useQuery(getCurUser, {});
+  const [todos] = useQuery(getTodos, {
+    where: { id: curUser?.id },
     orderBy: { createdAt: "desc" },
   });
   const [todoTitle, setTodoTitle] = useState("");
