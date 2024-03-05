@@ -4,8 +4,10 @@ import db from "db";
 export default async function getCurrentUser(_ = null, { session }: Ctx) {
   if (!session.userId) return null;
 
-  return db.user.findUnique({
+  const user = await db.user.findUnique({
     where: { id: session.userId },
     select: { id: true, name: true, email: true, role: true },
   });
+
+  return user;
 }
