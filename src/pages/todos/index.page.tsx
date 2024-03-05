@@ -68,7 +68,7 @@ const Todos = () => {
 
 export const TodosPage: BlitzPage = () => {
   return (
-    <Layout>
+    <Layout title="Todos">
       <Suspense>
         <Todos />
       </Suspense>

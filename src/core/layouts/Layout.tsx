@@ -1,6 +1,5 @@
 import Head from "next/head";
-import React from "react";
-import { BlitzLayout } from "@blitzjs/next";
+import React, { FC, Suspense } from "react";
 
 import { AppShell, Header, Text, Footer, Anchor, Button } from "@mantine/core";
 import { Horizontal, Vertical } from "mantine-layout-components";
@@ -32,7 +31,7 @@ const LogoutButton = () => {
   );
 };
 
-const Layout: BlitzLayout<{ title?: string; maxWidth?: string; children?: React.ReactNode }> = ({
+const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode }> = ({
   title,
   children,
 }) => {
@@ -87,9 +86,11 @@ const Layout: BlitzLayout<{ title?: string; maxWidth?: string; children?: React.
           },
         })}
       >
-        <Vertical fullH fullW>
-          {children}
-        </Vertical>
+        <Suspense fallback={"...loading"}>
+          <Vertical fullH fullW>
+            {children}
+          </Vertical>
+        </Suspense>
       </AppShell>
     </>
   );
