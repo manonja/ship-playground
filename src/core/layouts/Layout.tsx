@@ -1,5 +1,7 @@
 import Head from "next/head";
-import React, { FC, Suspense } from "react";
+import React from "react";
+import { BlitzLayout } from "@blitzjs/next";
+
 import { AppShell, Header, Text, Footer, Anchor, Button } from "@mantine/core";
 import { Horizontal, Vertical } from "mantine-layout-components";
 import { Routes } from "@blitzjs/next";
@@ -30,7 +32,7 @@ const LogoutButton = () => {
   );
 };
 
-const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode }> = ({
+const Layout: BlitzLayout<{ title?: string; maxWidth?: string; children?: React.ReactNode }> = ({
   title,
   children,
 }) => {
@@ -40,57 +42,55 @@ const Layout: FC<{ title?: string; maxWidth?: string; children?: React.ReactNode
   return (
     <>
       <Head>
-        <title>{title || "ship-playground"}</title>
+        <title>{`${title} | Ship Playground`}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Suspense fallback="Loading...">
-        <AppShell
-          padding="md"
-          // navbar={
-          //   <Navbar width={{ base: 300 }} height={500} p="xs">
-          //     {/* Navbar content */}
-          //   </Navbar>
-          // }
-          header={
-            <Header height={60} p="xs">
-              <Horizontal fullH spaceBetween>
-                <Anchor
-                  component={Link}
-                  href={Routes.Home()}
-                  color="grey.3"
-                  underline={false}
-                  fw="bold"
-                  size="xl"
-                >
-                  {" "}
-                  <div>Techio</div>
-                </Anchor>
+      <AppShell
+        padding="md"
+        // navbar={
+        //   <Navbar width={{ base: 300 }} height={500} p="xs">
+        //     {/* Navbar content */}
+        //   </Navbar>
+        // }
+        header={
+          <Header height={60} p="xs">
+            <Horizontal fullH spaceBetween>
+              <Anchor
+                component={Link}
+                href={Routes.Home()}
+                color="grey.3"
+                underline={false}
+                fw="bold"
+                size="xl"
+              >
+                {" "}
+                <div>Techio</div>
+              </Anchor>
 
-                <LogoutButton />
-              </Horizontal>
-            </Header>
-          }
-          footer={
-            <Footer height={30}>
-              <Horizontal fullH center>
-                <Text size="xs" color="dimned">
-                  copyright {projectName} {thisYear}
-                </Text>
-              </Horizontal>
-            </Footer>
-          }
-          styles={(theme) => ({
-            main: {
-              backgroundColor:
-                theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.colors.gray[0],
-            },
-          })}
-        >
-          <Vertical fullH fullW>
-            {children}
-          </Vertical>
-        </AppShell>
-      </Suspense>
+              <LogoutButton />
+            </Horizontal>
+          </Header>
+        }
+        footer={
+          <Footer height={30}>
+            <Horizontal fullH center>
+              <Text size="xs" color="dimned">
+                copyright {projectName} {thisYear}
+              </Text>
+            </Horizontal>
+          </Footer>
+        }
+        styles={(theme) => ({
+          main: {
+            backgroundColor:
+              theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.colors.gray[0],
+          },
+        })}
+      >
+        <Vertical fullH fullW>
+          {children}
+        </Vertical>
+      </AppShell>
     </>
   );
 };
