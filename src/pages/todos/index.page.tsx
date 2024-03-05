@@ -9,7 +9,7 @@ import React, { Suspense, useState } from "react";
 import Layout from "src/core/layouts/Layout";
 import toggleTodo from "src/features/todos/mutations/toggleTodo";
 import cleanCompleted from "src/features/todos/mutations/cleanCompleted";
-import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
+import { useCurrentUser } from "src/users/hooks/useCurrentUser";
 
 const Todo = ({ todo }) => {
   const [$toggleTodo, { isLoading }] = useMutation(toggleTodo);

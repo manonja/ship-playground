@@ -1,4 +1,3 @@
-"use client";
 import { useToggle, upperFirst } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
 import {
@@ -16,7 +15,7 @@ import {
 } from "@mantine/core";
 
 import { GoogleButton } from "src/core/components/MainAuthenticationForm/SocialButtons";
-import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
+import { useCurrentUser } from "src/users/hooks/useCurrentUser";
 import { AuthenticationError } from "blitz";
 import { FORM_ERROR } from "src/core/components/Form";
 import { useMutation } from "@blitzjs/rpc";

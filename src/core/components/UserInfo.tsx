@@ -1,4 +1,4 @@
-import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
+import { useCurrentUser } from "src/users/hooks/useCurrentUser";
 import { FC } from "react";
 import { Text } from "@mantine/core";
 import { Vertical } from "mantine-layout-components";
