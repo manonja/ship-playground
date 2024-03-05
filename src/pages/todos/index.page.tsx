@@ -12,10 +12,14 @@ import cleanCompleted from "src/features/todos/mutations/cleanCompleted";
 import { useCurrentUser } from "src/features/users/hooks/useCurrentUser";
 
 const Todo = ({ todo }) => {
-  const [$toggleTodo] = useMutation(toggleTodo);
+  const [$toggleTodo, { isLoading }] = useMutation(toggleTodo);
   return (
     <Horizontal>
-      <Checkbox checked={todo.done} onClick={() => $toggleTodo({ id: todo.id })} />
+      <Checkbox
+        disabled={isLoading}
+        checked={todo.done}
+        onClick={() => $toggleTodo({ id: todo.id })}
+      />
       <Text key={todo.title}>{todo.title}</Text>
     </Horizontal>
   );
@@ -28,7 +32,7 @@ const Todos = () => {
     orderBy: { createdAt: "desc" },
   });
   const [todoTitle, setTodoTitle] = useState("");
-  const [$addTodo] = useMutation(addTodo);
+  const [$addTodo, { isLoading }] = useMutation(addTodo);
   const [$cleanTodos] = useMutation(cleanCompleted);
   return (
     <Vertical fullH fullW center>
@@ -39,6 +43,7 @@ const Todos = () => {
           onChange={(event) => setTodoTitle(event.target.value)}
         />
         <Button
+          loading={isLoading}
           variant="gradient"
           gradient={{ from: "teal", to: "blue", deg: 60 }}
           onClick={async () => {
