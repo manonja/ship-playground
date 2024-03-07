@@ -1,4 +1,3 @@
-"use client";
 import { useMutation, useQuery } from "@blitzjs/rpc";
 import getTodos from "src/features/todos/queries/getTodos";
 import addTodo from "src/features/todos/mutations/addTodo";
@@ -9,7 +8,6 @@ import React, { Suspense, useState } from "react";
 import Layout from "src/core/layouts/Layout";
 import toggleTodo from "src/features/todos/mutations/toggleTodo";
 import cleanCompleted from "src/features/todos/mutations/cleanCompleted";
-import { useCurrentUser } from "src/users/hooks/useCurrentUser";
 
 const Todo = ({ todo }) => {
   const [$toggleTodo, { isLoading }] = useMutation(toggleTodo);
@@ -25,12 +23,7 @@ const Todo = ({ todo }) => {
   );
 };
 const Todos = () => {
-  const currentUser = useCurrentUser();
-
-  const [todos] = useQuery(getTodos, {
-    where: { id: currentUser?.id },
-    orderBy: { createdAt: "desc" },
-  });
+  const [todos] = useQuery(getTodos, {});
   const [todoTitle, setTodoTitle] = useState("");
   const [$addTodo, { isLoading }] = useMutation(addTodo);
   const [$cleanTodos] = useMutation(cleanCompleted);
